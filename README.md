@@ -11,7 +11,7 @@ Utworzenie wirtualnej zmiennej środowiskowej
 python -m venv venv
 ```
 
-Aktywacja zmiennej środowiskowej
+### Aktywacja zmiennej środowiskowej
 
 1. Windows
 ```sh
