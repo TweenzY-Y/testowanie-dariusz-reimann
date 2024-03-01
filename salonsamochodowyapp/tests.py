@@ -1,25 +1,16 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.core.files.uploadedfile import SimpleUploadedFile
-from .models import ListCars
+from salonsamochodowyapp.models import ListCars
+import os
 
-class ListCarsModelTest(TestCase):
+class CarImageTest(TestCase):
     def setUp(self):
-        # Create a simple image file
-        image = SimpleUploadedFile(name='test_image.jpg', content=open(r"C:\Users\Programowanie\Desktop\Guzik Cwel\testowanie-dariusz-reimann\media_car\Polski_Fiat_126p_rocznik_1973.jpg", 'rb').read(), content_type='image/jpeg')
+        self.client = Client()
+        with open("./salonsamochodowyapp/test.jpg", 'rb') as i:
+            self.carImage = SimpleUploadedFile(name='test_image.jpg', content=i.read(), content_type='image/jpeg')
+        self.car = ListCars.objects.create(carImage=self.carImage, carName="Test", carDescription="Test description", carPrice=2000, carYear=2000)
 
-        # Create a ListCars object with the image
-        self.car = ListCars.objects.create(
-            carName='Test Car',
-            carDescription='This is a test car.',
-            carPrice=10000,
-            carYear=2020,
-            carImage=image
-        )
-
-    def test_image_field(self):
-        # Try to access the image field
-        try:
-            image = self.car.carImage
-            self.fail('Expected an Exception but none was raised.')
-        except Exception as e:
-            self.assertIsInstance(e, ValueError)  # Replace YourExpectedException with the exception you expect to be raised
+    def test_image_display(self):
+        response = self.client.get("/media_car/" + str(self.car.carImage))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'image/jpeg')
