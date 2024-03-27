@@ -129,7 +129,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_car')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 sentry_sdk.init(
-    dsn="https://e82694c7c247dda669b31d566c0d7336@o4506904082251776.ingest.us.sentry.io/4506904085069824",
+    dsn="https://1be2976e9981633a3d44ec73a4e2ab92@o4506982685474816.ingest.us.sentry.io/4506982686720000",
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
     traces_sample_rate=1.0,

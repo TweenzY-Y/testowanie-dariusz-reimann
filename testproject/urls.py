@@ -17,9 +17,9 @@ def trigger_error3(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', home, name='home'),
+    path('', home, name='home'),
     re_path(r'^media_car/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT,
     }),
-    path('', trigger_error3),
+    path('sentry-debug/', trigger_error3),
 ]
