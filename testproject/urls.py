@@ -5,6 +5,7 @@ from django.conf import settings
 from salonsamochodowyapp.views import home
 from django.views.static import serve
 from django.urls import re_path
+from salonsamochodowyapp.views import CarDetailView
 
 def trigger_error(request):
     division_by_zero = 1 / 0
@@ -22,4 +23,6 @@ urlpatterns = [
         'document_root': settings.MEDIA_ROOT,
     }),
     path('sentry-debug/', trigger_error3),
+    path('car/<int:pk>/', CarDetailView.as_view(), name='car-detail'),
+
 ]
